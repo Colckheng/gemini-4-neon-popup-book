@@ -1,0 +1,13 @@
+{
+  "name": "gemini-4-neon-popup-book",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.8.64 preview",
+    "check": "npx --yes hyperframes@0.8.64 check",
+    "render": "npx --yes hyperframes@0.8.64 render",
+    "publish": "npx --yes hyperframes@0.8.64 publish",
+    "vo:tts": "node scripts/voiceover.mjs --generate",
+    "vo:mix": "node scripts/voiceover.mjs --mix"
+  }
+}

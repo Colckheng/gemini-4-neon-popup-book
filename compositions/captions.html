@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "Noto Serif SC"; font-style: normal; font-weight: 900; font-display: block; src: url("assets/fonts/NotoSerifSC-900.woff2") format("woff2"); }
+        #root { position: absolute; inset: 0; pointer-events: none; }
+        .cap { position: absolute; left: 32px; right: 32px; bottom: 40px; height: 84px; display: flex; align-items: center; justify-content: center; }
+        .cap-paper {
+          display: block; opacity: 0; white-space: nowrap;
+          font-family: "Noto Serif SC", serif; font-weight: 900; font-size: 35px; line-height: 50px; letter-spacing: 0.03em;
+          color: #1f1b17; background: #f3ebdd; padding: 12px 30px 14px;
+          box-shadow: 0 8px 22px rgba(12, 8, 4, 0.48);
+          clip-path: polygon(0.6% 6%, 12% 0%, 31% 4%, 52% 1%, 73% 5%, 91% 0%, 99.4% 7%, 100% 52%, 98.8% 94%, 82% 100%, 61% 96%, 40% 100%, 18% 95%, 1.4% 100%, 0% 48%);
+        }
+      </style>
+      <div data-hf-id="hf-cap-root" id="root" data-composition-id="captions" data-width="1080" data-height="1080" data-duration="34.0">
+        <div data-hf-id="hf-cl-1" id="captions-line-1" class="cap"><span data-hf-id="hf-ct-1" id="captions-text-1" class="cap-paper" style="transform: rotate(-0.65deg)">选大模型，总在速度和深度之间两难</span></div>
+        <div data-hf-id="hf-cl-2" id="captions-line-2" class="cap"><span data-hf-id="hf-ct-2" id="captions-text-2" class="cap-paper" style="transform: rotate(0.28deg)">要么轻快但浅尝辄止，要么深邃却沉重昂贵</span></div>
+        <div data-hf-id="hf-cl-3" id="captions-line-3" class="cap"><span data-hf-id="hf-ct-3" id="captions-text-3" class="cap-paper" style="transform: rotate(-0.35deg)">2026年11月，Google 推出 Gemini 4 Neon</span></div>
+        <div data-hf-id="hf-cl-4" id="captions-line-4" class="cap"><span data-hf-id="hf-ct-4" id="captions-text-4" class="cap-paper" style="transform: rotate(0.45deg)">介于 Hydrogen 与 Carbon 之间的黄金平衡点</span></div>
+        <div data-hf-id="hf-cl-5" id="captions-line-5" class="cap"><span data-hf-id="hf-ct-5" id="captions-text-5" class="cap-paper" style="transform: rotate(-0.18deg)">打开这本立体书，拉动五道核心能力机关</span></div>
+        <div data-hf-id="hf-cl-6" id="captions-line-6" class="cap"><span data-hf-id="hf-ct-6" id="captions-text-6" class="cap-paper" style="transform: rotate(0.52deg)">一百万统一上下文，输入、思考与长输出一气呵成</span></div>
+        <div data-hf-id="hf-cl-7" id="captions-line-7" class="cap"><span data-hf-id="hf-ct-7" id="captions-text-7" class="cap-paper" style="transform: rotate(-0.42deg)">四档可调思考深度，从极速响应到极限推理随需切换</span></div>
+        <div data-hf-id="hf-cl-8" id="captions-line-8" class="cap"><span data-hf-id="hf-ct-8" id="captions-text-8" class="cap-paper" style="transform: rotate(0.22deg)">文本、图像、音频、视频与 PDF 原生同步理解</span></div>
+        <div data-hf-id="hf-cl-9" id="captions-line-9" class="cap"><span data-hf-id="hf-ct-9" id="captions-text-9" class="cap-paper" style="transform: rotate(-0.55deg)">擅长多步 Agent 编排，可控性拔尖且幻觉率创新低</span></div>
+        <div data-hf-id="hf-cl-10" id="captions-line-10" class="cap"><span data-hf-id="hf-ct-10" id="captions-text-10" class="cap-paper" style="transform: rotate(0.36deg)">性能稳居前沿梯队，缓存输入更享九五折</span></div>
+        <div data-hf-id="hf-cl-11" id="captions-line-11" class="cap"><span data-hf-id="hf-ct-11" id="captions-text-11" class="cap-paper" style="transform: rotate(-0.48deg)">在模型层出不穷的今天，参数不再是唯一答案</span></div>
+        <div data-hf-id="hf-cl-12" id="captions-line-12" class="cap"><span data-hf-id="hf-ct-12" id="captions-text-12" class="cap-paper" style="transform: rotate(0.00deg)">Gemini 4 Neon，让深度思考真正立于工程一线</span></div>
+      </div>
+      <script>
+        (function () {
+          var CUES = [
+            [0.0, 2.6], [2.7, 5.3], [5.4, 7.6], [7.7, 10.0],
+            [10.1, 12.5], [12.6, 15.5], [15.6, 18.5], [18.6, 21.7],
+            [21.8, 24.7], [24.8, 27.7], [27.8, 30.5], [30.6, 34.0]
+          ];
+          var tl = gsap.timeline({ paused: true });
+          CUES.forEach(function (c, i) {
+            var el = document.getElementById("captions-text-" + (i + 1));
+            tl.fromTo(el, { opacity: 0, y: 14, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.24, ease: "steps(3)" }, c[0]);
+            tl.to(el, { opacity: 0, duration: 0.12, ease: "steps(2)" }, Math.max(c[0] + 0.3, c[1] - 0.12));
+          });
+          window.__timelines = window.__timelines || {};
+          window.__timelines["captions"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
