@@ -28,7 +28,7 @@ export function stream(seed) {
   };
 }
 
-// ---------- TIME: irregular hand-held stop-motion cadence on a 24-unit second ----------
+// ---------- TIME: irregular hand-held stop-motion cadence (<=24fps) or smooth continuous clock (>=30fps) ----------
 const CADENCES = {
   6: [4, 4, 5, 3, 4, 4],
   8: [3, 3, 4, 2, 3, 4, 3, 2],
@@ -36,6 +36,13 @@ const CADENCES = {
   24: new Array(24).fill(1),
 };
 export function makeClock(fps) {
+  // Smooth continuous mode for 30/60fps+ (no held-frame quantization)
+  if (fps >= 30 || fps === 0) {
+    const rate = fps >= 30 ? fps : 60;
+    return function frameAt(t) {
+      return { frame: Math.round(t * rate), t, smooth: true };
+    };
+  }
   const holds = CADENCES[fps] || CADENCES[12];
   const u = 1 / 24;
   return function frameAt(t) {
@@ -44,10 +51,10 @@ export function makeClock(fps) {
     let acc = 0;
     for (let i = 0; i < holds.length; i++) {
       const end = (acc + holds[i]) * u;
-      if (rem < end - 1e-9) return { frame: cycle * holds.length + i, t: cycle + acc * u };
+      if (rem < end - 1e-9) return { frame: cycle * holds.length + i, t: cycle + acc * u, smooth: false };
       acc += holds[i];
     }
-    return { frame: cycle * holds.length + holds.length - 1, t: cycle + (acc - holds[holds.length - 1]) * u };
+    return { frame: cycle * holds.length + holds.length - 1, t: cycle + (acc - holds[holds.length - 1]) * u, smooth: false };
   };
 }
 

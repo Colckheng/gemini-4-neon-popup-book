@@ -30,14 +30,15 @@ function readVars() {
   const num = (x, d) => (x === undefined || x === null || x === "" || Number.isNaN(Number(x)) ? d : Number(x));
   return {
     captions: !(v.captions === false || v.captions === "false"),
-    fps: num(v.fps, 12),
-    jitter: num(v.jitter, 1),
-    boil: num(v.boil, 1),
-    matter: num(v.matter, 1),
-    flicker: num(v.flicker, 1),
+    fps: num(v.fps, 60),
+    jitter: num(v.jitter, 0),
+    boil: num(v.boil, 0),
+    matter: num(v.matter, 0.45),
+    flicker: num(v.flicker, 0),
   };
 }
 const VARS = readVars();
+const SMOOTH = VARS.fps >= 30 || VARS.fps === 0;
 const frameAt = makeClock(VARS.fps);
 
 const scene = new THREE.Scene();
@@ -824,7 +825,8 @@ function update(t, fr) {
   let aT = a;
   if (within(t, T.tremble[0], T.tremble[1])) {
     const r = (t - T.tremble[0]) / (T.tremble[1] - T.tremble[0]);
-    aT += Math.max(0, srnd(900, fr)) * 0.055 * r * r;
+    const vib = SMOOTH ? 0.5 + 0.5 * Math.sin((t - T.tremble[0]) * 52) : Math.max(0, srnd(900, fr));
+    aT += vib * 0.055 * r * r;
   }
   O.cover.position.set(0, PIV_Y, 0);
   O.cover.rotation.set(-aT * HP, 0, 0);
@@ -852,7 +854,10 @@ function update(t, fr) {
   O.roller.rotation.x = (BD * h) / 0.072;
   O.beam.visible = h > 0.35 && t >= T.beam && a > 0.7;
   O.beam.rotation.z = Math.PI - 0.16 + 0.18 * Math.sin(Math.max(0, t - T.beam) * 1.4);
-  O.beam.scale.x = 0.88 + 0.16 * Math.sin(Math.max(0, t - T.beam) * 2.4) + 0.06 * srnd(902, fr);
+  O.beam.scale.x =
+    0.88 +
+    0.16 * Math.sin(Math.max(0, t - T.beam) * 2.4) +
+    (SMOOTH ? 0.03 * Math.sin(Math.max(0, t - T.beam) * 7.8) : 0.06 * srnd(902, fr));
   rise(O.ribbonBack, TR.ribbonBack(t) * (open ? 1 : 0));
   rise(O.ribbonFront, TR.ribbonFront(t) * (open ? 1 : 0));
 
@@ -1044,8 +1049,14 @@ function update(t, fr) {
     m.rotation.set(rx, yaw, rz);
     if (f.onBook && within(t, T.tremble[0], T.burst)) {
       const r = clamp((t - T.tremble[0]) / (T.tremble[1] - T.tremble[0]), 0, 1);
-      m.position.y += Math.max(0, srnd(i, fr, 63)) * 0.022 * r;
-      m.rotation.x += srnd(i, fr, 65) * 0.035 * r;
+      if (SMOOTH) {
+        const w = (t - T.tremble[0]) * (34 + (i % 7) * 4.5) + i * 1.37;
+        m.position.y += (0.5 + 0.5 * Math.sin(w)) * 0.02 * r;
+        m.rotation.x += Math.cos(w * 0.85) * 0.032 * r;
+      } else {
+        m.position.y += Math.max(0, srnd(i, fr, 63)) * 0.022 * r;
+        m.rotation.x += srnd(i, fr, 65) * 0.035 * r;
+      }
     }
     jit(m, 1000 + i, fr, t < T.burst + 0.45 && t > T.burst ? 0.015 : 0.0006);
   });
@@ -1130,12 +1141,13 @@ function update(t, fr) {
 }
 
 // ================================================================= seek -> render
-let ready = false, lastFrame = -1;
+let ready = false, lastKey = null;
 function renderAt(time) {
   if (!ready) return;
-  const { frame, t } = frameAt(Math.max(0, time));
-  if (frame === lastFrame) return;
-  lastFrame = frame;
+  const { frame, t, smooth } = frameAt(Math.max(0, time));
+  const key = smooth ? t.toFixed(6) : String(frame);
+  if (key === lastKey) return;
+  lastKey = key;
   update(t, frame);
   post.render(scene, camera);
 }
@@ -1145,7 +1157,7 @@ window.__hf.buildReady = window.__hf.buildReady || {};
 window.__hf.buildReady["gemini-neon-book"] = build().then(() => {
   buildTracks();
   ready = true;
-  lastFrame = -1;
+  lastKey = null;
   renderAt(window.__hfThreeTime || 0);
 });
 window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));

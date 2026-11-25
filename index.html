@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN" data-composition-variables="[
     {&quot;id&quot;:&quot;captions&quot;,&quot;type&quot;:&quot;boolean&quot;,&quot;label&quot;:&quot;字幕（烧进画面）&quot;,&quot;default&quot;:true},
-    {&quot;id&quot;:&quot;fps&quot;,&quot;type&quot;:&quot;enum&quot;,&quot;label&quot;:&quot;TIME · 定格帧率&quot;,&quot;default&quot;:&quot;12&quot;,&quot;options&quot;:[{&quot;value&quot;:&quot;8&quot;,&quot;label&quot;:&quot;8 fps&quot;},{&quot;value&quot;:&quot;12&quot;,&quot;label&quot;:&quot;12 fps（一拍二）&quot;},{&quot;value&quot;:&quot;24&quot;,&quot;label&quot;:&quot;24 fps（逐帧）&quot;}]},
-    {&quot;id&quot;:&quot;jitter&quot;,&quot;type&quot;:&quot;number&quot;,&quot;label&quot;:&quot;SPACE · 手放位移&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.05},
-    {&quot;id&quot;:&quot;boil&quot;,&quot;type&quot;:&quot;number&quot;,&quot;label&quot;:&quot;FORM · 边缘颤动&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.05},
-    {&quot;id&quot;:&quot;matter&quot;,&quot;type&quot;:&quot;number&quot;,&quot;label&quot;:&quot;MATTER · 颗粒&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.05},
-    {&quot;id&quot;:&quot;flicker&quot;,&quot;type&quot;:&quot;number&quot;,&quot;label&quot;:&quot;LIGHT · 曝光闪烁&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.05}
+    {&quot;id&quot;:&quot;fps&quot;,&quot;type&quot;:&quot;enum&quot;,&quot;label&quot;:&quot;TIME · 帧率风格&quot;,&quot;default&quot;:&quot;60&quot;,&quot;options&quot;:[{&quot;value&quot;:&quot;8&quot;,&quot;label&quot;:&quot;8 fps（定格）&quot;},{&quot;value&quot;:&quot;12&quot;,&quot;label&quot;:&quot;12 fps（一拍二定格）&quot;},{&quot;value&quot;:&quot;24&quot;,&quot;label&quot;:&quot;24 fps（胶片逐帧）&quot;},{&quot;value&quot;:&quot;30&quot;,&quot;label&quot;:&quot;30 fps（流畅）&quot;},{&quot;value&quot;:&quot;60&quot;,&quot;label&quot;:&quot;60 fps（丝滑流畅）&quot;}]},
+    {&quot;id&quot;:&quot;jitter&quot;,&quot;type&quot;:&quot;number&quot;,&quot;label&quot;:&quot;SPACE · 手放位移&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.05},
+    {&quot;id&quot;:&quot;boil&quot;,&quot;type&quot;:&quot;number&quot;,&quot;label&quot;:&quot;FORM · 边缘颤动&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.05},
+    {&quot;id&quot;:&quot;matter&quot;,&quot;type&quot;:&quot;number&quot;,&quot;label&quot;:&quot;MATTER · 颗粒&quot;,&quot;default&quot;:0.45,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.05},
+    {&quot;id&quot;:&quot;flicker&quot;,&quot;type&quot;:&quot;number&quot;,&quot;label&quot;:&quot;LIGHT · 曝光闪烁&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.05}
   ]">
   <head>
     <meta charset="UTF-8">
@@ -26,7 +26,7 @@
     </style>
   </head>
   <body>
-    <div data-hf-id="hf-root" id="root" data-composition-id="main" data-start="0" data-duration="34.0" data-width="1080" data-height="1080">
+    <div data-hf-id="hf-root" id="root" data-composition-id="main" data-start="0" data-duration="34.0" data-width="1080" data-height="1080" data-fps="60">
       <canvas data-hf-id="hf-stage" id="stage" width="1080" height="1080"></canvas>
 
       <!-- Diegetic 3D tabletop paper captions live inside Three.js (src/scene.js) and respond to --variables '{"captions":false}'. -->

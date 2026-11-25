@@ -25,11 +25,11 @@
 | 变量 | 说明 | 默认值 |
 | --- | --- | --- |
 | `captions` | 底部撕纸条中文字幕（`false` 输出干净版） | `true` |
-| `fps` | TIME：定格帧率（`8` / `12` / `24`） | `12` |
-| `jitter` | SPACE：逐帧手放位移 | `1` |
-| `boil` | FORM：GLSL 边缘颤动 | `1` |
-| `matter` | MATTER：纸纹与胶片颗粒 | `1` |
-| `flicker` | LIGHT：曝光闪烁 | `1` |
+| `fps` | TIME：帧率风格（`8` / `12` / `24` 定格，`30` / `60` 丝滑连续） | `60` |
+| `jitter` | SPACE：逐帧手放位移 | `0` |
+| `boil` | FORM：GLSL 边缘颤动 | `0` |
+| `matter` | MATTER：纸纹与胶片颗粒 | `0.45` |
+| `flicker` | LIGHT：曝光闪烁 | `0` |
 
 ## 常用命令
 

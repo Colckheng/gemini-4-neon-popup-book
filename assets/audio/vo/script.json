@@ -2,8 +2,8 @@
   "voice": "zh-CN-YunxiNeural",
   "baseRate": "+14%",
   "pitch": "-2Hz",
-  "inputVideo": "renders/gemini-4-neon-1080x1080-v3.mp4",
-  "outputVideo": "renders/gemini-4-neon-1080x1080-v3-vo.mp4",
+  "inputVideo": "renders/gemini-4-neon-1080x1080-v4-60fps.mp4",
+  "outputVideo": "renders/gemini-4-neon-1080x1080-v4-60fps-vo.mp4",
   "cues": [
     {
       "n": 1,
@@ -91,9 +91,9 @@
       "file": "10",
       "start": 24.8,
       "end": 27.7,
-      "caption": "性能稳居前沿梯队，缓存输入更享九五折",
+      "caption": "性能稳居前沿梯队，缓存输入直降九成五",
       "spoken": "性能稳居前沿梯队，缓存输入直降九成五",
-      "notes": "已按画面「-95% 缓存输入」修正口播措辞"
+      "notes": "已与画面「-95% 缓存输入」及 3D 字幕完全一致"
     },
     {
       "n": 11,
